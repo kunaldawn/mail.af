@@ -33,6 +33,7 @@ func (runner *Runner) Run(callback func()) {
 				senderCache[index] = emailSender
 			} else {
 				log.Println("ERROR : UNABLE TO CONNECT SENDER :", runner.job.ID, runner.job.Name, sender.ID, sender.Email)
+				callback()
 				return
 			}
 		}
