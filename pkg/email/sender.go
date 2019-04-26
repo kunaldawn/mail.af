@@ -15,7 +15,7 @@ func NewSender(sender *models.Sender) (*Sender, error) {
 	context := &Sender{sender: sender, dialer: gomail.NewPlainDialer("smtp.gmail.com", 587, sender.Email, sender.Password)}
 	closer, err := context.dialer.Dial()
 	if err != nil {
-		return &Sender{}, nil
+		return &Sender{}, err
 	}
 	context.closer = closer
 
