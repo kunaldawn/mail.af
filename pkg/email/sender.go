@@ -24,6 +24,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 package email
 
 import (
+	"crypto/tls"
 	"github.com/kunaldawn/mail.af/pkg/db/models"
 	"gopkg.in/gomail.v2"
 	"log"
@@ -37,6 +38,7 @@ type Sender struct {
 
 func NewSender(sender *models.Sender) (*Sender, error) {
 	context := &Sender{sender: sender, dialer: gomail.NewPlainDialer("smtp.gmail.com", 587, sender.Email, sender.Password)}
+	context.dialer.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 	closer, err := context.dialer.Dial()
 	if err != nil {
 		log.Println("ERROR : DIAL :", sender.ID, sender.Email, err)
