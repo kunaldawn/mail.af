@@ -24,6 +24,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 package db
 
 import (
+	"github.com/kunaldawn/mail.af/pkg/utils"
 	"gopkg.in/mgo.v2"
 	"log"
 	"sync"
@@ -43,7 +44,7 @@ func DB() *Mongo {
 
 		sessionFound := false
 		for !sessionFound {
-			session, err := mgo.Dial("localhost:27017")
+			session, err := mgo.Dial(utils.GetConfig().GetString("mongo"))
 			if err == nil {
 				mongoInstance.session = session
 				sessionFound = true

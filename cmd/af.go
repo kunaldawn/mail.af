@@ -85,7 +85,7 @@ func (af *MailAF) Start() {
 	dashboard := server.Group("/", gin.Logger(), gin.Recovery())
 	dashboard.Any("/*path", af.route)
 
-	err := http.ListenAndServe(":9988", server)
+	err := http.ListenAndServe(utils.GetConfig().GetString("addr"), server)
 	if err != nil {
 		panic(err)
 	}
@@ -312,8 +312,10 @@ func main() {
 	utils.GetConfig().SetConfigName("af.config")
 	utils.GetConfig().AddConfigPath("./")
 	utils.GetConfig().SetEnvPrefix("af")
-	utils.GetConfig().SetDefault("jwt_secret", "kajshdguabcvjhbaucbaweubcuwyebgfouweghbfuiwq")
-	utils.GetConfig().SetDefault("signature", "admin9988")
+	utils.GetConfig().SetDefault("jwt_secret", "SPCR87016Q1VOERFLPUZ")
+	utils.GetConfig().SetDefault("signature", "MX3EWSALAWIKJ9AUCC3Z")
+	utils.GetConfig().SetDefault("mongo", "localhost:27017")
+	utils.GetConfig().SetDefault("addr", ":9988")
 	utils.GetConfig().AutomaticEnv()
 	utils.Start()
 

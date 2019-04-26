@@ -1,2 +1,6 @@
 {
+  "mongo": "localhost:27017",
+  "jwt_secret": "SPCR87016Q1VOERFLPUZ",
+  "signature": "MX3EWSALAWIKJ9AUCC3Z",
+  "addr": ":9988"
 }
