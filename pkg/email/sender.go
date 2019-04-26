@@ -26,6 +26,7 @@ package email
 import (
 	"github.com/kunaldawn/mail.af/pkg/db/models"
 	"gopkg.in/gomail.v2"
+	"log"
 )
 
 type Sender struct {
@@ -38,6 +39,7 @@ func NewSender(sender *models.Sender) (*Sender, error) {
 	context := &Sender{sender: sender, dialer: gomail.NewPlainDialer("smtp.gmail.com", 587, sender.Email, sender.Password)}
 	closer, err := context.dialer.Dial()
 	if err != nil {
+		log.Println("ERROR : DIAL :", sender.ID, sender.Email, err)
 		return &Sender{}, err
 	}
 	context.closer = closer
