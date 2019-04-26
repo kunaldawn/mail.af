@@ -1,0 +1,24 @@
+<mat-card style="margin: 10px">
+  <mat-card-title>
+    Job Log : {{id}}
+  </mat-card-title>
+  <mat-card-content>
+    <table mat-table [dataSource]="logs" matSort width="100%">
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let element"> {{element.receiver.email}} </td>
+      </ng-container>
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+        <td mat-cell *matCellDef="let element"> {{getDate(element.time)}} </td>
+      </ng-container>
+      <ng-container matColumnDef="success">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Success</th>
+        <td mat-cell *matCellDef="let element"> {{element.success}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="log_columns"></tr>
+      <tr mat-row *matRowDef="let rows; columns: log_columns"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[100, 200, 500]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,10 @@
+{
+  "/api/v1/": {
+    "target": "http://localhost:9988",
+    "secure": false
+  },
+  "/auth/login/": {
+    "target": "http://localhost:9988",
+    "secure": false
+  }
+}

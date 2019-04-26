@@ -1,0 +1,42 @@
+<mat-tab-group>
+  <mat-tab label="Senders">
+    <mat-card style="margin: 10px">
+      <mat-card-title>
+        Senders
+      </mat-card-title>
+      <mat-card-content>
+        <table mat-table [dataSource]="senders" matSort width="100%">
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-flat-button color="warn" (click)="removeSender(element.id)">DEL</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="senders_columns"></tr>
+          <tr mat-row *matRowDef="let rows; columns: senders_columns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[100, 200, 500]" showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Add Sender">
+    <mat-card style="margin: 10px">
+      <mat-card-title>
+        Add Sender
+      </mat-card-title>
+      <mat-card-content>
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Email" type="email" [(ngModel)]="email"/>
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Password" type="password" [(ngModel)]="password"/>
+        </mat-form-field>
+        <button mat-flat-button color="warn" (click)="addSender()">ADD</button>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

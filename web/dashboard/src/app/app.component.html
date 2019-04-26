@@ -1,0 +1,30 @@
+<div style="padding-bottom: 5px">
+  <mat-progress-bar mode="determinate" [value]="loader.progress$|async" style="height:10px"></mat-progress-bar>
+</div>
+<mat-toolbar calss="mat-elevation-z8">
+  <span class="fill-remaining-space">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item (click)="openJobs()">
+        <mat-icon>email</mat-icon>
+        <span>Jobs</span>
+      </button>
+      <button mat-menu-item (click)="openGroups()">
+        <mat-icon>contacts</mat-icon>
+        <span>Groups</span>
+      </button>
+      <button mat-menu-item (click)="openSettings()">
+        <mat-icon>account_box</mat-icon>
+        <span>Senders</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </span>
+  <span class="fill-remaining-space">Mail.AF</span>
+</mat-toolbar>
+<router-outlet calss="mat-elevation-z8"></router-outlet>

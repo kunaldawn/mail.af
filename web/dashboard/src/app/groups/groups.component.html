@@ -1,0 +1,47 @@
+<mat-tab-group>
+  <mat-tab label="Groups">
+    <mat-card style="margin: 10px">
+      <mat-card-title>
+        Groups
+      </mat-card-title>
+      <mat-card-content>
+        <table mat-table [dataSource]="groups" matSort width="100%">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="emails">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Emails</th>
+            <td mat-cell *matCellDef="let element"> {{element.emails}} </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-flat-button color="warn" (click)="removeGroup(element.id)">DEL</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="group_columns"></tr>
+          <tr mat-row *matRowDef="let rows; columns: group_columns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[100, 200, 500]" showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Create">
+    <mat-card style="margin: 10px">
+      <mat-card-title>
+        Add Group
+      </mat-card-title>
+      <mat-card-content>
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Name" type="text" [(ngModel)]="name"/>
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <textarea matInput placeholder="Emails" rows="5" [(ngModel)]="emails"></textarea>
+        </mat-form-field>
+        <button mat-flat-button color="warn" (click)="addGroup()">ADD</button>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
+
