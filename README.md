@@ -31,3 +31,5 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 Create new GMail Account.
 Go to security settings of Google Account (https://myaccount.google.com/security) and enable "Less secure app access".
 Add the account in Mail.AF in senders.
+
+![Security](docs/secure_apps.png)
