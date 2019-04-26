@@ -1,11 +1,13 @@
-/*
+# Mail.AF
+
+```
  __  __       _ _      _    _____
 |  \/  | __ _(_) |    / \  |  ___|
 | |\/| |/ _` | | |   / _ \ | |_
 | |  | | (_| | | |_ / ___ \|  _|
 |_|  |_|\__,_|_|_(_)_/   \_\_|
 
-Send mails as fuck!
+Send mail as fuck!
 Author : Kunal Dawn (kunal.dawn@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
@@ -20,19 +22,12 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>
-*/
-package models
+```
 
-import (
-	"github.com/kunaldawn/mail.af/pkg/utils"
-)
+#### Send mails as fuck !
+**Mail.AF** allows one to send **Image Emails** to a group of email addresses (receivers) from a group of email addresses (senders).
 
-type Group struct {
-	ID        string      `json:"id" bson:"id"`
-	Name      string      `json:"name" bson:"name"`
-	Receivers []*Receiver `json:"receivers" bson:"receivers"`
-}
-
-func NewGroup(name string, receivers []*Receiver) *Group {
-	return &Group{ID: utils.UUID(), Name: name, Receivers: receivers}
-}
+#### Add Senders
+Create new GMail Account.
+Go to security settings of Google Account (https://myaccount.google.com/security) and enable "Less secure app access".
+Add the account in Mail.AF in senders.
