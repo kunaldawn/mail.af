@@ -54,18 +54,16 @@ func (runner *Runner) Run(callback func()) {
 		for index, sender := range runner.senders {
 			if emailSender, err := email.NewSender(sender); err == nil {
 				senderCache[index] = emailSender
-			} else {
-				log.Println("ERROR : UNABLE TO CONNECT SENDER :", runner.job.ID, runner.job.Name, sender.ID, sender.Email)
-				callback()
-				return
 			}
 		}
-		log.Println("SENDERS INITIALIZED :", runner.job.ID, runner.job.Name, len(senderCache))
 
-		senderIndex := 0
-		successCount := 0
-		failedCount := 0
 		if len(senderCache) > 0 {
+			log.Println("SENDERS INITIALIZED :", runner.job.ID, runner.job.Name, len(senderCache))
+
+			senderIndex := 0
+			successCount := 0
+			failedCount := 0
+
 			for _, receiver := range runner.job.Receivers {
 				sendLog := &models.Log{}
 				db.DB().Logs().Find(bson.M{"job_id": runner.job.ID, "receiver.email": receiver.Email}).One(sendLog)
@@ -96,10 +94,13 @@ func (runner *Runner) Run(callback func()) {
 					senderIndex = 0
 				}
 			}
+
+			log.Println("ENDING JOB :", runner.job.ID, runner.job.Name, successCount, failedCount)
+			db.DB().Jobs().Update(bson.M{"id": runner.job.ID}, bson.M{"$set": bson.M{"running": false, "end_time": time.Now().UnixNano(), "done": true, "send_success": successCount, "send_failed": failedCount}})
+		} else {
+			log.Println("ERROR : UNABLE TO CONNECT SENDER :", runner.job.ID, runner.job.Name)
 		}
 
-		log.Println("ENDING JOB :", runner.job.ID, runner.job.Name, successCount, failedCount)
-		db.DB().Jobs().Update(bson.M{"id": runner.job.ID}, bson.M{"$set": bson.M{"running": false, "end_time": time.Now().UnixNano(), "done": true, "send_success": successCount, "send_failed": failedCount}})
 		callback()
 	}()
 }
